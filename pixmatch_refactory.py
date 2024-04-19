@@ -467,4 +467,4 @@ Este fragmento de código comprueba si la variable runpage está definida en el 
 Si no está definida, se establece mystate.runpage en Main. Luego se llama a mystate.runpage().
 """
 if 'runpage' not in mystate: mystate.runpage = Main
-mystate.runpage()import streamlit as st
+mystate.runpage()
