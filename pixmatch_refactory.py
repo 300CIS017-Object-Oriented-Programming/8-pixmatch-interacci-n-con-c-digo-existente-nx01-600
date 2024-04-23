@@ -111,8 +111,8 @@ def Leaderboard(what_to_do):
                 leaderboard[str(leaderboard_dict_lngth + 1)] = {'NameCountry': mystate.GameDetails[3], 'HighestScore': mystate.myscore}
                 leaderboard = dict(sorted(leaderboard.items(), key=lambda item: item[1]['HighestScore'], reverse=True))  # sort desc
 
-                if len(leaderboard) > 3:
-                    for i in range(len(leaderboard)-3): leaderboard.popitem()    # rmv last kdict ey
+                if len(leaderboard) > 4:
+                    for i in range(len(leaderboard)-4): leaderboard.popitem()    # rmv last kdict ey
 
                 json.dump(leaderboard, open(vpth + 'leaderboard.json', 'w'))     # write file
 
@@ -132,7 +132,8 @@ def Leaderboard(what_to_do):
                             sc0.write('🏆 Past Winners:')
                             sc1.write(f"🥇 | {leaderboard[vkey]['NameCountry']}: :red[{leaderboard[vkey]['HighestScore']}]")
                         elif rknt == 2: sc2.write(f"🥈 | {leaderboard[vkey]['NameCountry']}: :red[{leaderboard[vkey]['HighestScore']}]")
-                        elif rknt == 3: sc3.write(f"🥈 | {leaderboard[vkey]['NameCountry']}: :red[{leaderboard[vkey]['HighestScore']}]")
+                        elif rknt == 3: sc3.write(f"🥉 | {leaderboard[vkey]['NameCountry']}: :red[{leaderboard[vkey]['HighestScore']}]")
+                        elif rknt == 4: sc4.write(f"🏅 | {leaderboard[vkey]['NameCountry']}: :red[{leaderboard[vkey]['HighestScore']}]")
 
 def InitialPage():
     """
@@ -353,11 +354,16 @@ def NewGame():
     for i in range(1, (total_cells_per_row_or_col+1)):
         tlst = ([1] * total_cells_per_row_or_col) + [2] # 2 = rt side padding
         globals()['cols' + str(i)] = st.columns(tlst)
-    
+
+    count = 0
     for vcell in range(1, (total_cells_per_row_or_col ** 2)+1):
         if 1 <= vcell <= (total_cells_per_row_or_col * 1):
             arr_ref = '1'
             mval = 0
+
+        elif cont == (total_cells_per_row_or_col * 1)+1:
+            mystate.runpage = Main
+            st.rerun() 
 
         elif ((total_cells_per_row_or_col * 1)+1) <= vcell <= (total_cells_per_row_or_col * 2):
             arr_ref = '2'
